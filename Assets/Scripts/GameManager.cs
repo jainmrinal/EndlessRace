@@ -2,28 +2,24 @@
 
 public class GameManager : MonoBehaviour
 {
-    public int a;
-    private static GameManager instance = null;
+    private static GameManager gameInstance = null;
     private GameManager() { }
     public static GameManager getInstance()
     {
-        if (instance == null)
+        if (gameInstance == null)
         {
-            instance = new GameManager();
+            gameInstance = new GameManager();
         }
-        return instance;
+
+        return gameInstance;
     }
+
     public delegate void SwitchDimension();
     public static event SwitchDimension switchDimension;
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.A))
-        switchDimension();
-    }
-
-   public void CheckSingleTon()
-    {
-        a += 5;
+            switchDimension();
     }
 }

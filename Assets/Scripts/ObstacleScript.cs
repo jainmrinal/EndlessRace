@@ -2,21 +2,12 @@
 using System.Collections;
 
 public class ObstacleScript : MonoBehaviour {
-    GameManager GM;
+    GameManager gameManager;
 
     void Start()
     {
-        GM = GameManager.getInstance();
+        gameManager = GameManager.getInstance();
         GameManager.switchDimension += SwitchRendererState;
-  
-    }
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-           GM.CheckSingleTon();
-            Debug.Log(GM.a);
-        }
     }
     void SwitchRendererState()
     {
