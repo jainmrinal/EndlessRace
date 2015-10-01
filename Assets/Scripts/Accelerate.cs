@@ -15,11 +15,14 @@ public class Accelerate : MonoBehaviour {
     private CharacterController controller;
     GameManager gameManager;
     Blur blurscript;
+    public Vector3 startPos;
 	// Use this for initialization
 	void Start () {
+		startPos = this.transform.position;
 		gameManager = GameManager.getInstance();
 		blurscript = mainCam.GetComponent<Blur>();
 		GameManager.blurEffects += SwitchOnBlur;
+		GameManager.resetApp += ResetPosis;
         controller = this.gameObject.GetComponent<CharacterController>();
 	}
 	
@@ -28,9 +31,11 @@ public class Accelerate : MonoBehaviour {
         acceleration = Mathf.Max(0, Mathf.Sin(Time.time/interval) - ( 1- accelerationInterval));
         speed += (acceleration * Time.deltaTime);
         controller.SimpleMove(this.transform.forward * speed);
-
+			
         moveHorizontal = Input.GetAxis("Horizontal");
         controller.SimpleMove(this.transform.right * moveHorizontal * sideSpeed);
+		if(Input.GetKeyDown(KeyCode.LeftControl))
+			gameManager.blureffectsOn();
    }
    
    void SwitchOnBlur(){
@@ -54,6 +59,12 @@ public class Accelerate : MonoBehaviour {
 		blurscript.enabled = false;
 		blurscript.iterations = 0;
 		gameManager.ChangeDimension();
+	}
+	
+	void ResetPosis(){
+	
+		this.transform.position = startPos;
+		
 	}
    
   }

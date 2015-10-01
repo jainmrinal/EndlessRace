@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class GameManager : MonoBehaviour
+﻿public class GameManager
 {
     private static GameManager gameInstance = null;
     private GameManager() { }
@@ -20,15 +18,21 @@ public class GameManager : MonoBehaviour
 	public delegate void BlurEffects();
 	public static event BlurEffects blurEffects;
 	
-	void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.LeftControl))
-			blurEffects();
-	}
+	public delegate void ResetApp();
+	public static event ResetApp resetApp;
 	
 	public void ChangeDimension(){
 	
 			switchDimension();
 		
+	}
+	public void ResetApplication(){
+	
+		resetApp();	
+	}
+	
+	public void blureffectsOn(){
+	
+	blurEffects();
 	}
 }

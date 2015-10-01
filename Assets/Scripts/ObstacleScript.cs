@@ -16,6 +16,8 @@ public class ObstacleScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collided.");
+		gameManager.ResetApplication();
     }
+    
+    
 }
