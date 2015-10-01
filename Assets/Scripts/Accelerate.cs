@@ -1,18 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityStandardAssets.ImageEffects;
 public class Accelerate : MonoBehaviour {
 
     public float interval = 10.0f;
     public float accelerationInterval = 0;
-
     public float speed;
     public float sideSpeed;
     private float moveHorizontal;
     private float acceleration;
+    public float blurSpeed;
+    public GameObject mainCam;
+    public int timeLimit;
     private CharacterController controller;
+    GameManager gameManager;
+    Blur blurscript;
 	// Use this for initialization
 	void Start () {
+		gameManager = GameManager.getInstance();
+		blurscript = mainCam.GetComponent<Blur>();
+		GameManager.blurEffects += SwitchOnBlur;
         controller = this.gameObject.GetComponent<CharacterController>();
 	}
 	
@@ -25,4 +32,28 @@ public class Accelerate : MonoBehaviour {
         moveHorizontal = Input.GetAxis("Horizontal");
         controller.SimpleMove(this.transform.right * moveHorizontal * sideSpeed);
    }
-}
+   
+   void SwitchOnBlur(){
+		
+		blurscript.enabled = true;
+		StartCoroutine("RemoveBlur");
+	
+	}
+	IEnumerator RemoveBlur(){
+	float currentTime = Time.time;
+	while(blurscript.iterations<=20){
+		
+		if(Time.time - currentTime >= 0.1f)
+		{
+			blurscript.iterations +=5;
+			currentTime = Time.time;
+		}
+			yield return null;
+		
+		}
+		blurscript.enabled = false;
+		blurscript.iterations = 0;
+		gameManager.ChangeDimension();
+	}
+   
+  }

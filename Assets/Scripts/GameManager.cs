@@ -16,10 +16,18 @@ public class GameManager : MonoBehaviour
 
     public delegate void SwitchDimension();
     public static event SwitchDimension switchDimension;
-
-    void Update()
+	public delegate void BlurEffects();
+	public static event BlurEffects blurEffects;
+	
+	void Update()
     {
         if(Input.GetKeyDown(KeyCode.LeftControl))
-            switchDimension();
-    }
+			blurEffects();
+	}
+	
+	public void ChangeDimension(){
+	
+			switchDimension();
+		
+	}
 }
