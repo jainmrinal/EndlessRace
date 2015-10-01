@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     public delegate void SwitchDimension();
     public static event SwitchDimension switchDimension;
+    
 	public delegate void BlurEffects();
 	public static event BlurEffects blurEffects;
 	

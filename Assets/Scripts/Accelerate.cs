@@ -43,9 +43,9 @@ public class Accelerate : MonoBehaviour {
 	float currentTime = Time.time;
 	while(blurscript.iterations<=20){
 		
-		if(Time.time - currentTime >= 0.1f)
+		if(Time.time - currentTime >= 0.01f)
 		{
-			blurscript.iterations +=5;
+			blurscript.iterations +=2;
 			currentTime = Time.time;
 		}
 			yield return null;
