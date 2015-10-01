@@ -13,4 +13,9 @@ public class ObstacleScript : MonoBehaviour {
     {
         this.gameObject.GetComponent<Renderer>().enabled ^= true;
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Collided.");
+    }
 }
